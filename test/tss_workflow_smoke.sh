@@ -22,6 +22,7 @@ gen_channel_password() {
 BIN="${BIN:-./tss}"
 BASE="${BASE:-$(mktemp -d /private/tmp/tss-workflow-smoke.XXXXXX)}"
 PASS="${PASS:-1234567890}"
+MESSAGE="${MESSAGE:-1234567890}"
 CHPASS="${CHPASS:-$(gen_channel_password)}"
 KEYGEN_CH="${KEYGEN_CH:-$(printf '515%08X' "$(($(date +%s)+2400))")}"
 SIGN1_CH="${SIGN1_CH:-$(printf '611%08X' "$(($(date +%s)+2400))")}"
@@ -210,6 +211,7 @@ start_sign() {
 		--home "$(party_home "$idx")" \
 		--vault_name default \
 		--password "$PASS" \
+		--message "$MESSAGE" \
 		--channel_password "$CHPASS" \
 		--channel_id "$channel_id" \
 		--log_level debug \
